@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antoine Bezille — Mechanical Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf9f6;
+  --bg2: #f4f2ec;
+  --bg3: #edeae0;
+  --text: #1c1b18;
+  --muted: #6b6760;
+  --muted2: #a09d95;
+  --line: rgba(100,95,80,.12);
+  --line2: rgba(100,95,80,.2);
+  --a1: #2c4a3e;
+  --a2: #4a7c68;
+  --a3: #8b6914;
+  --badge-bg: rgba(44,74,62,.06);
+  --badge-bd: rgba(44,74,62,.2);
+  --badge-col: #2c4a3e;
+  --nav-bg: rgba(250,249,246,.94);
+  --card: rgba(255,255,255,.9);
+  --shadow: 0 4px 32px rgba(44,74,62,.08);
+  --trans: all .3s cubic-bezier(.4,0,.2,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 60px; transition: background .4s, box-shadow .4s;
+}
+nav.scrolled { background: var(--nav-bg); backdrop-filter: blur(16px); box-shadow: 0 1px 0 var(--line2); }
+.nl { text-decoration: none; display: flex; flex-direction: column; line-height: 1.15; }
+.nl-first { font-family: 'DM Mono', monospace; font-size: .62rem; letter-spacing: .28em; text-transform: uppercase; color: var(--muted2); }
+.nl-last { font-family: 'EB Garamond', serif; font-size: 1.3rem; font-weight: 500; letter-spacing: .06em; color: var(--text); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-family: 'DM Mono', monospace; font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
+.nav-links a:hover { color: var(--a1); }
+
+/* HERO */
+#hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; padding: 0 60px;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 55% 55% at 75% 45%, rgba(44,74,62,.05) 0%, transparent 70%),
+              radial-gradient(ellipse 35% 45% at 15% 65%, rgba(139,105,20,.04) 0%, transparent 60%);
+}
+.hero-rule { width: 48px; height: 1px; background: var(--a1); opacity: .5; margin-bottom: 28px; }
+.hero-tag { font-family: 'DM Mono', monospace; font-size: .66rem; letter-spacing: .2em; color: var(--a2); text-transform: uppercase; margin-bottom: 20px; }
+.hero-name {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(3.6rem, 8vw, 7rem);
+  font-weight: 400; line-height: .95;
+  letter-spacing: -.01em; color: var(--text);
+}
+.hero-name span { font-style: italic; color: var(--a1); }
+.hero-sub {
+  margin-top: 28px; max-width: 460px;
+  font-family: 'Outfit', sans-serif; font-size: .92rem;
+  line-height: 1.85; color: var(--muted); font-weight: 300;
+}
+.hero-cta { margin-top: 42px; display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 11px 26px; font-family: 'DM Mono', monospace;
+  font-size: .66rem; letter-spacing: .12em; text-transform: uppercase;
+  text-decoration: none; transition: var(--trans); cursor: pointer; border-radius: 2px;
+}
+.btn-primary { background: var(--a1); color: #fff; border: none; }
+.btn-primary:hover { background: #1e3329; }
+.btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--line2); }
+.btn-ghost:hover { border-color: var(--a1); color: var(--a1); }
+.hero-scroll {
+  position: absolute; bottom: 36px; left: 60px;
+  display: flex; align-items: center; gap: 14px;
+  font-family: 'DM Mono', monospace; font-size: .58rem;
+  letter-spacing: .15em; color: var(--muted2); text-transform: uppercase;
+}
+.sc-line { width: 44px; height: 1px; background: var(--muted2); }
+
+/* SECTION */
+section { padding: 110px 60px; }
+.sec-lbl {
+  font-family: 'DM Mono', monospace; font-size: .62rem;
+  letter-spacing: .22em; color: var(--a2); text-transform: uppercase;
+  display: flex; align-items: center; gap: 14px; margin-bottom: 60px;
+}
+.sec-lbl::after { content: ''; flex: 1; max-width: 80px; height: 1px; background: var(--a2); opacity: .35; }
+.sec-title { font-family: 'EB Garamond', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400; line-height: 1.1; margin-bottom: 14px; }
+
+/* ABOUT */
+#about { background: var(--bg); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1100px; }
+.bio p { font-size: .93rem; line-height: 1.95; color: var(--muted); margin-bottom: 20px; font-weight: 300; }
+.bio strong { color: var(--text); font-weight: 500; }
+
+/* CV entries */
+.cvt {
+  font-family: 'DM Mono', monospace; font-size: .6rem;
+  letter-spacing: .2em; color: var(--a2); text-transform: uppercase;
+  margin-bottom: 18px; border-bottom: 1px solid var(--line2); padding-bottom: 8px;
+}
+.cvi { display: flex; gap: 18px; margin-bottom: 20px; }
+.cvd { font-family: 'DM Mono', monospace; font-size: .65rem; color: var(--muted2); white-space: nowrap; min-width: 72px; padding-top: 2px; }
+.cvc h4 { font-family: 'Outfit', sans-serif; font-size: .87rem; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+.cvc p { font-size: .8rem; color: var(--muted); line-height: 1.6; font-weight: 300; }
+.badge {
+  display: inline-block; margin-top: 5px; padding: 2px 10px; border-radius: 2px;
+  font-family: 'DM Mono', monospace; font-size: .58rem;
+  background: var(--badge-bg); color: var(--badge-col); border: 1px solid var(--badge-bd);
+}
+.tag {
+  display: inline-block; padding: 3px 12px; border-radius: 2px;
+  font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .06em;
+  background: var(--badge-bg); color: var(--badge-col); border: 1px solid var(--badge-bd);
+}
+.tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+
+/* Language bars */
+.lr { display: flex; align-items: center; gap: 14px; margin-bottom: 13px; }
+.ln { font-family: 'DM Mono', monospace; font-size: .73rem; color: var(--text); min-width: 68px; }
+.lb { flex: 1; height: 2px; background: var(--line2); border-radius: 2px; }
+.lf { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--a1), var(--a2)); width: 0; transition: width 1.2s ease; }
+.ll { font-family: 'DM Mono', monospace; font-size: .6rem; color: var(--muted2); min-width: 72px; }
+
+/* Contact strip */
+.cstrip {
+  margin-top: 38px; padding: 22px 24px; border: 1px solid var(--line2);
+  border-radius: 3px; background: var(--bg2); display: flex; flex-direction: column; gap: 11px;
+}
+.ci2 { display: flex; align-items: center; gap: 10px; font-family: 'DM Mono', monospace; font-size: .7rem; }
+.cdot { width: 4px; height: 4px; border-radius: 50%; background: var(--a2); flex-shrink: 0; }
+.clbl { color: var(--muted2); min-width: 58px; }
+.ci2 a { color: var(--a1); text-decoration: none; }
+.ci2 a:hover { text-decoration: underline; }
+
+/* PROJECTS */
+#projects { background: var(--bg2); }
+
+/* Crypto / STRAN card */
+.crypto-card {
+  max-width: 900px; background: var(--card); border: 1px solid var(--line2);
+  border-radius: 4px; padding: 52px 56px; box-shadow: var(--shadow);
+}
+.crypto-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; margin-bottom: 36px; flex-wrap: wrap; }
+.crypto-title { font-family: 'EB Garamond', serif; font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 400; line-height: 1.1; color: var(--text); }
+.crypto-title em { font-style: italic; color: var(--a1); }
+.crypto-site {
+  display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px;
+  border: 1px solid var(--line2); border-radius: 2px; text-decoration: none;
+  font-family: 'DM Mono', monospace; font-size: .65rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted); transition: var(--trans); white-space: nowrap;
+}
+.crypto-site:hover { border-color: var(--a1); color: var(--a1); }
+.crypto-body { font-size: .92rem; line-height: 1.9; color: var(--muted); font-weight: 300; margin-bottom: 20px; }
+.crypto-body strong { color: var(--text); font-weight: 500; }
+.crypto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 36px; }
+.crypto-block { padding: 22px 24px; border: 1px solid var(--line); border-radius: 3px; background: var(--bg2); }
+.crypto-block-label { font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: var(--a2); margin-bottom: 10px; }
+.crypto-block p { font-size: .83rem; line-height: 1.7; color: var(--muted); font-weight: 300; }
+.crypto-block strong { color: var(--text); font-weight: 500; }
+
+/* DIVIDER */
+.divider { height: 1px; background: var(--line2); margin: 0 60px; }
+
+/* FOOTER */
+footer {
+  padding: 36px 60px; border-top: 1px solid var(--line2);
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: 'DM Mono', monospace; font-size: .63rem; color: var(--muted2);
+}
+footer a { color: var(--muted2); text-decoration: none; transition: color .2s; }
+footer a:hover { color: var(--a1); }
+footer .footer-links { display: flex; gap: 24px; }
+
+/* RESPONSIVE */
+@media (max-width: 860px) {
+  nav { padding: 16px 20px; }
+  section { padding: 80px 20px; }
+  #hero { padding: 0 20px; }
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .crypto-card { padding: 32px 24px; }
+  .crypto-grid { grid-template-columns: 1fr; }
+  .hero-scroll { left: 20px; }
+  footer { padding: 28px 20px; flex-direction: column; gap: 12px; align-items: flex-start; }
+  .divider { margin: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#hero" class="nl">
+    <span class="nl-first">Antoine</span>
+    <span class="nl-last">Bezille</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-rule"></div>
+  <div class="hero-tag">Engineer · Builder · ETH Zürich</div>
+  <h1 class="hero-name">Antoine<br><span>Bezille</span></h1>
+  <p class="hero-sub">
+    Mechanical Engineering student at ETH Zürich.<br>
+    Building at the intersection of precision mechanics,<br>
+    decentralised finance, and digital asset infrastructure.
+  </p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="#about" class="btn btn-ghost">About me</a>
+  </div>
+  <div class="hero-scroll"><div class="sc-line"></div>scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-lbl">01 — Profile</div>
+  <div class="about-grid">
+    <div>
+      <h2 class="sec-title">Who I am</h2>
+      <div class="bio">
+        <p>Born 19 April 2006. I am a 2nd-year <strong>Mechanical Engineering</strong> student at <strong>ETH Zürich</strong>, completing my first year with an average of <strong>5.27 / 6</strong>.</p>
+        <p>Alongside my studies, I have a deep interest in <strong>tokenisation and the broader crypto ecosystem</strong>. I create tokens and NFTs, and I am actively involved in digital asset infrastructure — from on-chain smart contracts to real-world asset tokenisation frameworks.</p>
+        <p>Fluent in French (native), <strong>German C1 (DSD2)</strong>, and <strong>English C1 (IELTS 7.5)</strong>.</p>
+      </div>
+      <div class="cstrip">
+        <div class="ci2"><div class="cdot"></div><span class="clbl">Personal</span><a href="mailto:antoine.bezille@gmail.com">antoine.bezille@gmail.com</a></div>
+        <div class="ci2"><div class="cdot"></div><span class="clbl">ETH</span><a href="mailto:abezille@student.ethz.ch">abezille@student.ethz.ch</a></div>
+        <div class="ci2"><div class="cdot"></div><span class="clbl">Startup</span><a href="mailto:antoine.bezille@stran.ch">antoine.bezille@stran.ch</a></div>
+        <div class="ci2"><div class="cdot"></div><span class="clbl">Phone</span><a href="tel:+41792209407">+41 79 220 94 07</a></div>
+      </div>
+      <div style="margin-top:36px">
+        <div class="cvt">Languages</div>
+        <div class="lr"><span class="ln">French</span><div class="lb"><div class="lf" data-w="100"></div></div><span class="ll">Native</span></div>
+        <div class="lr"><span class="ln">German</span><div class="lb"><div class="lf" data-w="88"></div></div><span class="ll">C1 — DSD2</span></div>
+        <div class="lr"><span class="ln">English</span><div class="lb"><div class="lf" data-w="85"></div></div><span class="ll">C1 — IELTS 7.5</span></div>
+      </div>
+    </div>
+
+    <div>
+      <div style="margin-bottom:38px">
+        <div class="cvt">Education</div>
+        <div class="cvi">
+          <span class="cvd">2024 —</span>
+          <div class="cvc">
+            <h4>ETH Zürich — Mechanical Engineering</h4>
+            <p>2nd year. Average: 5.27 / 6.</p>
+            <span class="badge">Current</span>
+          </div>
+        </div>
+        <div class="cvi">
+          <span class="cvd">2024</span>
+          <div class="cvc">
+            <h4>Baccalauréat Français International</h4>
+            <p>Trilingual FR/DE/EN. Mention très bien, félicitations du jury — 18.38 / 20.</p>
+          </div>
+        </div>
+        <div class="cvi">
+          <span class="cvd">2024</span>
+          <div class="cvc">
+            <h4>DSD2 — Deutsches Sprachdiplom Stufe 2</h4>
+            <p>German C1.</p>
+          </div>
+        </div>
+        <div class="cvi">
+          <span class="cvd">2023</span>
+          <div class="cvc">
+            <h4>IELTS — Band Score 7.5 (C1)</h4>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:38px">
+        <div class="cvt">Experience</div>
+        <div class="cvi">
+          <span class="cvd">2024–25</span>
+          <div class="cvc">
+            <h4>Waiter — Sihlmatt Restaurant, Zug</h4>
+            <p>Two summer seasons, service in DE/FR.</p>
+          </div>
+        </div>
+        <div class="cvi">
+          <span class="cvd">2024</span>
+          <div class="cvc">
+            <h4>Maths &amp; Physics Tutor</h4>
+            <p>Private tutoring for high school students.</p>
+          </div>
+        </div>
+        <div class="cvi">
+          <span class="cvd">2023</span>
+          <div class="cvc">
+            <h4>Ski Camp Counsellor — Body &amp; Mind</h4>
+            <p>Group leader, child companion.</p>
+          </div>
+        </div>
+        <div class="cvi">
+          <span class="cvd">2022</span>
+          <div class="cvc">
+            <h4>Legal Observation Internship</h4>
+            <p>Assize Court Aix-en-Provence &amp; Court of Marseille.</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="cvt">Interests</div>
+        <div class="tags">
+          <span class="tag">Football</span>
+          <span class="tag">Ski</span>
+          <span class="tag">Tennis</span>
+          <span class="tag">Marathon</span>
+          <span class="tag">Solo Travel</span>
+          <span class="tag">Charity</span>
+          <span class="tag">Mechatronics</span>
+          <span class="tag">DeFi</span>
+          <span class="tag">Tokenisation</span>
+          <span class="tag">NFT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-lbl">02 — Projects</div>
+  <h2 class="sec-title" style="margin-bottom:48px">Digital Assets &amp; Tokenisation</h2>
+
+  <div class="crypto-card">
+    <div class="crypto-header">
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--a2);margin-bottom:12px;">Real-World Asset Tokenisation</div>
+        <h3 class="crypto-title">stran.ch<br><em>RWA Token Platform</em></h3>
+      </div>
+      <a href="https://stran.ch" target="_blank" class="crypto-site">↗ stran.ch</a>
+    </div>
+
+    <p class="crypto-body">
+      I am deeply interested in <strong>tokenisation</strong> — the process of bringing real-world assets on-chain — and in the crypto ecosystem at large.
+      I create <strong>tokens and NFTs</strong>, and I am co-founding <strong>stran.ch</strong>, an early-stage startup
+      (access code: <strong style="color:var(--a1);font-family:'DM Mono',monospace;">fidelio</strong>) working toward real-world asset tokenisation focused on Swiss real estate.
+    </p>
+    <p class="crypto-body">
+      We are currently in the building phase — no product is live yet. Our aim is to enable <strong>fractional ownership</strong> of Swiss real estate through on-chain tokens,
+      making an asset class historically inaccessible to retail investors available from CHF 100. The planned infrastructure runs on <strong>Polygon</strong>, with smart contracts
+      designed to handle yield distribution, compliance, and DEX trading.
+    </p>
+
+    <div class="crypto-grid">
+      <div class="crypto-block">
+        <div class="crypto-block-label">Blockchain</div>
+        <p><strong>Polygon</strong> — EVM-compatible, low-fee, high-throughput infrastructure planned for token deployment and smart contract execution.</p>
+      </div>
+      <div class="crypto-block">
+        <div class="crypto-block-label">Token &amp; NFT Creation</div>
+        <p>I design and deploy <strong>fungible tokens and NFTs</strong> — from tokenised asset shares to digital collectibles and access-gated assets.</p>
+      </div>
+      <div class="crypto-block">
+        <div class="crypto-block-label">Smart Contracts</div>
+        <p>Solidity contracts in development covering <strong>ERC-3643 compliance</strong>, automated yield distribution, multisig governance, and upgradeable proxies.</p>
+      </div>
+      <div class="crypto-block">
+        <div class="crypto-block-label">Vision</div>
+        <p>Our goal is to build a <strong>FINMA-aware</strong> tokenisation framework under Swiss DLT-Lex 2021, making real estate investable for retail from CHF 100.</p>
+      </div>
+    </div>
+
+    <div class="tags" style="margin-top:36px;">
+      <span class="tag">Polygon</span>
+      <span class="tag">ERC-20 / ERC-721</span>
+      <span class="tag">ERC-3643</span>
+      <span class="tag">NFT</span>
+      <span class="tag">Solidity</span>
+      <span class="tag">RWA Tokenisation</span>
+      <span class="tag">Swiss Real Estate</span>
+      <span class="tag">DeFi</span>
+      <span class="tag">FINMA</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Antoine Bezille</span>
+  <div class="footer-links">
+    <a href="mailto:antoine.bezille@gmail.com">Email</a>
+    <a href="https://stran.ch" target="_blank">stran.ch</a>
+    <a href="tel:+41792209407">+41 79 220 94 07</a>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () =>
+  document.getElementById('nav').classList.toggle('scrolled', scrollY > 50)
+);
+window.addEventListener('load', () => {
+  setTimeout(() =>
+    document.querySelectorAll('.lf').forEach(el => el.style.width = el.dataset.w + '%'), 400
+  );
+});
+</script>
+</body>
+</html>
