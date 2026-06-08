@@ -434,10 +434,17 @@ footer a:hover { color: var(--text); }
   <!-- VIDEO -->
   <div style="margin-top:48px;">
     <div class="sec-label" style="margin-bottom:16px;" data-i18n="sec_video">Video — mirror display in action</div>
-    <div class="video-wrap" style="max-width:380px;">
-      <video autoplay loop muted playsinline preload="auto" style="pointer-events:none; transform:rotate(-90deg); transform-origin:center; width:100%;">
-        <source src="Smartphonetotablet/Vidéo_état_actuel_tourner_de_90_degré_dans_sensantihorairepourlapage.mp4" type="video/mp4">
-      </video>
+    <!-- portrait video: container sized to final display dimensions after rotation -->
+    <div style="width:320px; border:1px solid var(--line2); background:#000;">
+      <div style="position:relative; width:100%; overflow:hidden; height:568px;">
+        <video autoplay loop muted playsinline preload="auto"
+          style="pointer-events:none; position:absolute;
+                 width:568px; height:320px;
+                 top:50%; left:50%;
+                 transform:translate(-50%,-50%) rotate(-90deg);">
+          <source src="Smartphonetotablet/Vidéo_état_actuel_tourner_de_90_degré_dans_sensantihorairepourlapage.mp4" type="video/mp4">
+        </video>
+      </div>
       <div class="video-label" data-i18n="video_label">iPhone 15 mirroring to iPad LCD via VGA · no touch input · portrait only</div>
     </div>
   </div>
